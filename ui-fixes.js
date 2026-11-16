@@ -1,0 +1,11 @@
+document.addEventListener('DOMContentLoaded',()=>{
+const q=document.getElementById('quizQuestion'),opts=document.getElementById('quizChoices'),next=document.getElementById('quizNext'),progress=document.getElementById('quizProgress'),feedback=document.getElementById('quizFeedback');
+if(!q||!opts||!next)return;
+// Repair the quiz if another script failed to initialize it.
+if(!q.textContent.trim()){
+const data=[['What should you do before every car journey?',['Wear a seat belt','Check your phone','Ignore traffic signs'],0,'Seat belts reduce the risk of serious injury.'],['What is India’s emergency response number?',['1010','112','555'],1,'Dial 112 for emergencies in India.'],['What should you do at a pedestrian crossing?',['Speed up','Use your phone','Slow down and yield'],2,'Always watch for people crossing.'],['What should motorcycle riders wear?',['A properly fastened certified helmet','Only sunglasses','No protection'],0,'A certified helmet is essential.'],['What should you do after drinking alcohol?',['Drive slowly','Do not drive','Drive short distances'],1,'Never drive while impaired.']];
+let idx=0,score=0,answered=false;
+function render(){answered=false;const item=data[idx];progress.textContent=`Question ${idx+1} of ${data.length}`;q.textContent=item[0];opts.replaceChildren();feedback.textContent='';next.disabled=true;next.textContent=idx===data.length-1?'See results →':'Next question →';item[1].forEach((label,i)=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>{if(answered)return;answered=true;score+=Number(i===item[2]);opts.querySelectorAll('button').forEach((btn,j)=>{btn.disabled=true;if(j===item[2])btn.style.borderColor='#238a5b'});feedback.textContent=(i===item[2]?'Correct! ':'Not quite. ')+item[3];next.disabled=false});opts.append(b)})}
+next.addEventListener('click',()=>{if(idx===data.length){idx=0;score=0;render();return}idx++;if(idx<data.length){render();return}progress.textContent='Quiz complete';q.textContent=`You scored ${score} out of ${data.length}`;opts.replaceChildren();feedback.textContent='Keep learning and practising safe road habits.';next.textContent='Try again';next.disabled=false});render();
+}
+});
