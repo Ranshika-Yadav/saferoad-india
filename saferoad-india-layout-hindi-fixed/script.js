@@ -1,0 +1,19 @@
+const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('nav');menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'×':'☰'});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰'}));document.getElementById('year').textContent=new Date().getFullYear();const dialog=document.getElementById('pledgeDialog'),check=document.getElementById('pledgeCheck'),confirm=document.getElementById('confirmPledge'),result=document.getElementById('pledgeResult');document.getElementById('pledgeBtn').addEventListener('click',()=>dialog.showModal());document.getElementById('closePledge').addEventListener('click',()=>dialog.close());check.addEventListener('change',()=>confirm.disabled=!check.checked);
+
+const guideData={drivers:{title:'Before you drive',intro:'Small habits can prevent serious harm.',items:['Wear your seat belt on every trip.','Follow speed limits and slow down near crossings.','Keep your phone away while driving.','Never drive after drinking alcohol.']},riders:{title:'Ride protected',intro:'Protect yourself and your passenger.',items:['Wear a properly fastened, certified helmet.','Avoid weaving between vehicles or sudden lane changes.','Use indicators and stay visible, especially at night.','Keep a safe distance and respect speed limits.']},pedestrians:{title:'Cross with care',intro:'Stay alert and make yourself visible.',items:['Use designated crossings and footpaths where available.','Look both ways and check turning vehicles.','Avoid using your phone while crossing.','Help children and older adults cross safely.']},emergency:{title:'Respond safely',intro:'Protect yourself and call trained responders.',items:['Check for traffic and other dangers before approaching.','In India, dial 112 for emergency assistance.','Share the exact crash location and number of injured people.','Do not move injured people unless they face immediate danger.']}};document.querySelectorAll('.guide-tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.guide-tab').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});btn.classList.add('active');btn.setAttribute('aria-pressed','true');const g=guideData[btn.dataset.guide];document.getElementById('guidePanel').innerHTML='<div><span class="guide-kicker">ROAD SAFETY CHECKLIST</span><h3>'+g.title+'</h3><p>'+g.intro+'</p></div><ul>'+g.items.map(i=>'<li>'+i+'</li>').join('')+'</ul>'}));
+async function submitForm(form,endpoint){
+  const button=form.querySelector('button[type="submit"]');
+  let status=form.querySelector('.form-status');
+  if(!status){status=document.createElement('p');status.className='form-status';status.setAttribute('role','status');form.append(status)}
+  const original=button.textContent;button.disabled=true;button.textContent='Submitting…';status.textContent='';
+  try{
+    const payload=Object.fromEntries(new FormData(form).entries());
+    const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||'Submission failed');
+    status.textContent='Submitted successfully!';status.style.color='#17633b';form.reset();
+  }catch(error){status.textContent=error.message+' Please run this site using python server.py (not by opening the HTML file).';status.style.color='#b42318'}
+  finally{button.disabled=false;button.textContent=original}
+}
+document.getElementById('contactForm').addEventListener('submit',event=>{event.preventDefault();submitForm(event.currentTarget,'/api/contact')});
+document.getElementById('volunteerForm').addEventListener('submit',event=>{event.preventDefault();submitForm(event.currentTarget,'/api/volunteer')});

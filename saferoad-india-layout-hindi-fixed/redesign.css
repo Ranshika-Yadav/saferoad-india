@@ -1,0 +1,27 @@
+/* SafeRoad UI refresh — desktop and mobile */
+:root{--orange:#ff643c;--ink:#102735;--cream:#f8faf9}
+html{scroll-padding-top:92px}body{overflow-x:hidden}section{scroll-margin-top:92px}
+.container{width:min(1200px,calc(100% - 56px))}
+.header{height:82px;padding:0 max(28px,calc((100% - 1320px)/2));gap:24px}
+.header .brand{flex-shrink:0;font-size:19px}.header nav{gap:20px;min-width:0;justify-content:flex-end;flex:1}
+.header nav a{white-space:nowrap;font-size:12px}.header .navcta{padding:14px 17px;border-radius:8px}.lang-btn{flex-shrink:0}
+.hero{min-height:650px}.heroimage{background-image:url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=2000&q=85');background-position:center 54%}
+.herooverlay{background:linear-gradient(90deg,rgba(8,25,36,.96) 0%,rgba(8,25,36,.84) 46%,rgba(8,25,36,.22) 100%)}
+.hero-inner{padding:100px 0 78px}.hero h1{font-size:clamp(48px,5.6vw,78px);letter-spacing:-3px}
+.section{padding-top:90px;padding-bottom:90px}.sectionhead{gap:40px}
+.resourcegrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px;align-items:stretch}
+.resource{display:flex;flex-direction:column;min-width:0;overflow:hidden;background:#fff;border:1px solid #e4e9e7;border-radius:16px;box-shadow:0 14px 36px #112d3810;transition:transform .2s,box-shadow .2s}
+.resource:hover{transform:translateY(-4px);box-shadow:0 20px 44px #112d3820}
+.resourcephoto{height:225px;flex:none;background-size:cover;background-position:center}
+.resourcephoto.one{background-image:url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=900&q=80')}
+.resourcephoto.two{background-image:url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80')}
+.resourcephoto.three{background-image:url('https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?auto=format&fit=crop&w=900&q=80')}
+.resourcebody{padding:26px;display:flex;flex-direction:column;flex:1}.resourcebody h3{font-size:21px;line-height:1.35;margin:14px 0 12px}.resourcebody p{font-size:14px;line-height:1.7;color:#61717a;margin:0 0 24px}.resourcebody a{margin-top:auto;font-weight:800;font-size:13px;color:#e35b32}.resourcebody a:hover{text-decoration:underline}
+.extras-section{position:relative}.extras-section h2{line-height:1.15}.feature-panel{max-width:900px;padding:36px 40px;border-radius:18px}.feature-panel #quizQuestion{font-size:23px;line-height:1.4;margin:16px 0}.choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.choice-grid button{min-height:64px;font-weight:600}.choice-grid button:focus-visible{outline:3px solid var(--orange);outline-offset:2px}#quizFeedback{min-height:22px}.feature-panel #quizNext{border-radius:8px}.faq-list details{padding:22px 0}.faq-list summary{line-height:1.5}
+.resource-downloads a{border-radius:10px}.sectionhead h2,.extras-section h2{overflow-wrap:break-word}
+@media(max-width:1350px){.header nav{gap:14px}.header nav a{font-size:11px}.header{padding:0 24px;gap:15px}}
+@media(max-width:1120px){.header{height:76px}.hamburger{display:block;order:3;margin-left:0}.lang-btn{order:2;margin-left:auto}.header nav{display:none;position:absolute;top:76px;left:0;right:0;max-height:calc(100vh - 76px);overflow:auto;background:white;padding:18px 28px 26px;box-shadow:0 20px 30px #0b223322;flex-direction:column;align-items:stretch;gap:0}.header nav.open{display:flex}.header nav a{font-size:14px;padding:13px 6px;white-space:normal}.header nav .navcta{text-align:center;margin-top:10px}.resourcegrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:720px){.container{width:calc(100% - 36px)}.header{padding:0 18px}.header .brand{font-size:17px}.header .brandmark{width:36px;height:36px}.lang-btn{padding:8px 10px}.hero{min-height:620px}.hero-inner{padding:92px 0 70px}.hero h1{font-size:clamp(43px,11vw,62px);letter-spacing:-2px}.hero p{font-size:15px}.section{padding-top:70px;padding-bottom:70px}.resourcegrid{grid-template-columns:1fr!important}.resourcephoto{height:215px}.feature-panel{padding:24px 20px}.choice-grid{grid-template-columns:1fr}.feature-panel #quizQuestion{font-size:20px}.faq-grid{gap:22px}}
+
+/* Compact toolkit and FAQ: remove oversized empty vertical areas */
+#library.section{padding-top:52px;padding-bottom:48px}#library .eyebrow{margin-bottom:10px}#library h2{margin:0 0 22px;font-size:clamp(32px,3.6vw,48px)}#library .resource-downloads{margin-top:0;gap:12px}#library .resource-downloads a{padding:13px 16px}#faq.section{padding-top:64px;padding-bottom:72px}#faq .eyebrow{margin-bottom:12px}#faq h2{margin-bottom:0}#faq .faq-grid{align-items:start}#faq .faq-list details:first-child{padding-top:0}#faq .faq-list details{padding:17px 0}#faq .faq-list summary{font-size:16px}@media(max-width:720px){#library.section{padding:42px 0}#faq.section{padding:46px 0}#faq h2{margin-bottom:20px}}
